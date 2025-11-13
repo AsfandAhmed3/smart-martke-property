@@ -1,0 +1,11 @@
+{
+  "python.defaultInterpreterPath": "c:\\personal\\Client project\\market\\MArket project website\\smart-property-manager-v1.1\\smart-property-manager\\backend\\venv\\Scripts\\python.exe",
+  "python.analysis.extraPaths": [
+    "c:\\personal\\Client project\\market\\MArket project website\\smart-property-manager-v1.1\\smart-property-manager\\backend"
+  ],
+  "python.envFile": "${workspaceFolder}/backend/.env",
+  "python.linting.pylintEnabled": true,
+  "editor.formatOnSave": false,
+  "python-envs.defaultEnvManager": "ms-python.python:system",
+  "python-envs.pythonProjects": []
+}
