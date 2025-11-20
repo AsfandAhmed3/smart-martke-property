@@ -80,6 +80,29 @@ export default {
     return apiClient.get('/auth/roles/');
   },
   
+  // Admin - User Management
+  getAdminUsers(params) {
+    return apiClient.get('/auth/admin/users/', { params });
+  },
+  getAdminUser(id) {
+    return apiClient.get(`/auth/admin/users/${id}/`);
+  },
+  createAdminUser(data) {
+    return apiClient.post('/auth/admin/users/create/', data);
+  },
+  updateAdminUser(id, data) {
+    return apiClient.patch(`/auth/admin/users/${id}/`, data);
+  },
+  deleteAdminUser(id) {
+    return apiClient.delete(`/auth/admin/users/${id}/`);
+  },
+  toggleSuperadmin(userId) {
+    return apiClient.post(`/auth/admin/users/${userId}/toggle-superadmin/`);
+  },
+  getAdminUserStats() {
+    return apiClient.get('/auth/admin/users/stats/');
+  },
+  
   // Properties
   getProperties(params) {
     return apiClient.get('/properties/', { params });
@@ -103,5 +126,100 @@ export default {
   // Owners
   getOwners() {
     return apiClient.get('/owners/');
+  },
+
+  // Dashboard
+  getDashboardStatistics(params) {
+    return apiClient.get('/dashboard/statistics/', { params });
+  },
+
+  // Tenants
+  getTenants(params) {
+    return apiClient.get('/tenants/', { params });
+  },
+  getTenant(id) {
+    return apiClient.get(`/tenants/${id}/`);
+  },
+  createTenant(data) {
+    return apiClient.post('/tenants/', data);
+  },
+  updateTenant(id, data) {
+    return apiClient.patch(`/tenants/${id}/`, data);
+  },
+  deleteTenant(id) {
+    return apiClient.delete(`/tenants/${id}/`);
+  },
+  getTenantStatistics() {
+    return apiClient.get('/tenants/statistics/');
+  },
+
+  // Leases
+  getLeases(params) {
+    return apiClient.get('/leases/', { params });
+  },
+  getLease(id) {
+    return apiClient.get(`/leases/${id}/`);
+  },
+  createLease(data) {
+    return apiClient.post('/leases/', data);
+  },
+  updateLease(id, data) {
+    return apiClient.patch(`/leases/${id}/`, data);
+  },
+  deleteLease(id) {
+    return apiClient.delete(`/leases/${id}/`);
+  },
+  getLeaseStatistics() {
+    return apiClient.get('/leases/statistics/');
+  },
+
+  // Maintenance
+  getMaintenanceRequests(params) {
+    return apiClient.get('/maintenance/', { params });
+  },
+  getMaintenanceRequest(id) {
+    return apiClient.get(`/maintenance/${id}/`);
+  },
+  createMaintenanceRequest(data) {
+    return apiClient.post('/maintenance/', data);
+  },
+  updateMaintenanceRequest(id, data) {
+    return apiClient.patch(`/maintenance/${id}/`, data);
+  },
+  deleteMaintenanceRequest(id) {
+    return apiClient.delete(`/maintenance/${id}/`);
+  },
+  getMaintenanceStatistics() {
+    return apiClient.get('/maintenance/statistics/');
+  },
+
+  // Documents
+  getFolders(params) {
+    return apiClient.get('/documents/folders/', { params });
+  },
+  getFolder(id) {
+    return apiClient.get(`/documents/folders/${id}/`);
+  },
+  createFolder(data) {
+    return apiClient.post('/documents/folders/', data);
+  },
+  getDocuments(params) {
+    return apiClient.get('/documents/', { params });
+  },
+  getDocument(id) {
+    return apiClient.get(`/documents/${id}/`);
+  },
+  uploadDocument(formData) {
+    return apiClient.post('/documents/', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  },
+  deleteDocument(id) {
+    return apiClient.delete(`/documents/${id}/`);
+  },
+  getDocumentStatistics() {
+    return apiClient.get('/documents/statistics/');
   },
 };

@@ -1,53 +1,56 @@
-# 🚀 Quick Start Guide
+# 🚀 Quick Start Guide - UPDATED
+
+## ✅ What's New
+
+**All requirements implemented:**
+1. ✅ Supabase PostgreSQL connected
+2. ✅ Real user name displayed (no more "Jack")
+3. ✅ Superadmin system with management command
+4. ✅ Complete user management interface
+5. ✅ All data real (no dummy data)
+6. ✅ Live notifications system
 
 ## Prerequisites
 - Python 3.9+
 - Node.js 16+
-- Git
+- Internet connection (for Supabase)
 
-## Installation
+## 🎯 Quick Installation (3 Steps)
 
-### 1. Backend Setup (Django)
+### Step 1: Setup Database & Create Superadmin
 
 ```powershell
 # Navigate to backend directory
-cd "c:\personal\Client project\market\smart-property-manager\backend"
+cd backend
 
-# Virtual environment is already created, just activate it
+# Virtual environment setup
+python -m venv venv
 .\venv\Scripts\activate
 
-# Install remaining dependencies (if needed)
+# Install dependencies
 pip install -r requirements.txt
 
-# Database is already migrated and seeded
-# If you need to reset the database, run:
-# python manage.py migrate
-# python manage.py seed_data
+# Run migrations to Supabase
+python manage.py makemigrations
+python manage.py migrate
+
+# Create superadmin user
+python manage.py create_superadmin
 ```
 
-### 2. Frontend Setup (Vue.js)
+**Default superadmin credentials:**
+- Email: `admin@smartproperty.com`
+- Password: `admin123456`
+- **⚠️ Change after first login!**
+
+### Step 2: Start Backend
 
 ```powershell
-# Navigate to frontend directory
-cd "c:\personal\Client project\market\smart-property-manager\frontend"
-
-# Dependencies are already installed
-# If you need to reinstall:
-# npm install
-```
-
-## Running the Application
-
-### Start Backend (Terminal 1)
-```powershell
-cd "c:\personal\Client project\market\smart-property-manager\backend"
+cd backend
 .\venv\Scripts\activate
 python manage.py runserver
 ```
-✅ Backend running at: http://127.0.0.1:8000/
-
-### Start Frontend (Terminal 2)
-```powershell
+✅ Backend running at: http://localhost:8000/
 cd "c:\personal\Client project\market\smart-property-manager\frontend"
 npm run dev
 ```

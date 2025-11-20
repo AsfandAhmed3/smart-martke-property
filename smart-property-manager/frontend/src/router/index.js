@@ -33,6 +33,41 @@ const routes = [
         component: Dashboard,
       },
       {
+        path: 'properties',
+        name: 'Properties',
+        component: () => import('../views/Properties.vue'),
+      },
+      {
+        path: 'tenants',
+        name: 'Tenants',
+        component: () => import('../views/Tenants.vue'),
+      },
+      {
+        path: 'leases',
+        name: 'Leases',
+        component: () => import('../views/Leases.vue'),
+      },
+      {
+        path: 'analytics',
+        name: 'Analytics',
+        component: () => import('../views/Analytics.vue'),
+      },
+      {
+        path: 'maintenance',
+        name: 'Maintenance',
+        component: () => import('../views/Maintenance.vue'),
+      },
+      {
+        path: 'ai-insights',
+        name: 'AIInsights',
+        component: () => import('../views/AIInsights.vue'),
+      },
+      {
+        path: 'documents',
+        name: 'Documents',
+        component: () => import('../views/Documents.vue'),
+      },
+      {
         path: 'profile',
         name: 'ViewProfile',
         component: () => import('../views/ViewProfile.vue'),
@@ -41,6 +76,12 @@ const routes = [
         path: 'account-settings',
         name: 'AccountSettings',
         component: () => import('../views/AccountSettings.vue'),
+      },
+      {
+        path: 'admin/users',
+        name: 'UserManagement',
+        component: () => import('../views/admin/UserManagement.vue'),
+        meta: { requiresSuperAdmin: true },
       },
     ],
   },
@@ -60,6 +101,14 @@ router.beforeEach((to, from, next) => {
     next('/login');
   } else if (to.meta.requiresGuest && isAuthenticated) {
     next('/dashboard');
+  } else if (to.meta.requiresSuperAdmin) {
+    // Check if user is superadmin
+    if (!authStore.user || (!authStore.user.is_superadmin && !authStore.user.is_superuser)) {
+      alert('Access denied. Superadmin privileges required.');
+      next('/dashboard');
+    } else {
+      next();
+    }
   } else {
     next();
   }

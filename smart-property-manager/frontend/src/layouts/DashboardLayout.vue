@@ -5,8 +5,10 @@
       <!-- Portfolio Value Card -->
       <div class="portfolio-card">
         <p class="portfolio-label">Total Portfolio Value</p>
-        <h2 class="portfolio-value">$500.8M</h2>
-        <p class="portfolio-change">+12.5% YTD</p>
+        <h2 class="portfolio-value">{{ formatCurrency(portfolioValue) }}</h2>
+        <p class="portfolio-change" :class="portfolioChange >= 0 ? 'positive' : 'negative'">
+          {{ portfolioChange >= 0 ? '+' : '' }}{{ portfolioChange }}% YTD
+        </p>
       </div>
 
       <!-- Navigation Menu -->
@@ -18,55 +20,64 @@
           Dashboard
         </router-link>
 
-        <button class="nav-item" @click="showComingSoon('Properties')">
+        <router-link to="/properties" class="nav-item" active-class="active">
           <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
           </svg>
           Properties
-        </button>
+        </router-link>
 
-        <button class="nav-item" @click="showComingSoon('Tenant CRM')">
+        <router-link to="/tenants" class="nav-item" active-class="active">
           <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
           </svg>
           Tenant CRM
-        </button>
+        </router-link>
 
-        <button class="nav-item" @click="showComingSoon('Lease Management')">
+        <router-link to="/leases" class="nav-item" active-class="active">
           <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
           </svg>
           Lease Management
-        </button>
+        </router-link>
 
-        <button class="nav-item" @click="showComingSoon('Analytics & ROI')">
+        <router-link to="/analytics" class="nav-item" active-class="active">
           <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
           </svg>
           Analytics & ROI
-        </button>
+        </router-link>
 
-        <button class="nav-item" @click="showComingSoon('Maintenance')">
+        <router-link to="/maintenance" class="nav-item" active-class="active">
           <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
           </svg>
           Maintenance
-        </button>
+        </router-link>
 
-        <button class="nav-item" @click="showComingSoon('AI Insights')">
+        <router-link to="/ai-insights" class="nav-item" active-class="active">
           <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
           </svg>
           AI Insights
-        </button>
+        </router-link>
 
-        <button class="nav-item" @click="showComingSoon('Documents')">
+        <router-link to="/documents" class="nav-item" active-class="active">
           <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
           </svg>
           Documents
-        </button>
+        </router-link>
+
+        <!-- Superadmin Section -->
+        <div v-if="isSuperAdmin" class="nav-divider"></div>
+        <router-link v-if="isSuperAdmin" to="/admin/users" class="nav-item" active-class="active">
+          <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          User Management
+        </router-link>
       </nav>
     </aside>
 
@@ -92,8 +103,8 @@
 
           <!-- User Menu -->
           <div class="user-menu" @click="toggleProfileMenu">
-            <div class="user-avatar">JD</div>
-            <span class="user-name">Jack</span>
+            <div class="user-avatar">{{ userInitials }}</div>
+            <span class="user-name">{{ userName }}</span>
             <svg class="dropdown-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
@@ -130,13 +141,58 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '../stores/auth';
+import api from '../services/api';
 
 const router = useRouter();
 const authStore = useAuthStore();
 const showProfileMenu = ref(false);
+const portfolioValue = ref(0);
+const portfolioChange = ref(0);
+
+// Computed properties for user info
+const userName = computed(() => {
+  if (!authStore.user) return 'Guest';
+  return authStore.user.full_name || `${authStore.user.first_name} ${authStore.user.last_name}`.trim() || authStore.user.email;
+});
+
+const userInitials = computed(() => {
+  if (!authStore.user) return 'G';
+  const firstName = authStore.user.first_name || '';
+  const lastName = authStore.user.last_name || '';
+  if (firstName && lastName) {
+    return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
+  }
+  if (firstName) return firstName.charAt(0).toUpperCase();
+  if (authStore.user.email) return authStore.user.email.charAt(0).toUpperCase();
+  return 'U';
+});
+
+const isSuperAdmin = computed(() => {
+  return authStore.user?.is_superadmin || authStore.user?.is_superuser || false;
+});
+
+const formatCurrency = (value) => {
+  if (value >= 1000000) {
+    return `$${(value / 1000000).toFixed(1)}M`;
+  } else if (value >= 1000) {
+    return `$${(value / 1000).toFixed(1)}K`;
+  }
+  return `$${value.toFixed(0)}`;
+};
+
+const fetchPortfolioStats = async () => {
+  try {
+    const response = await api.getPropertyStatistics();
+    portfolioValue.value = response.data.total_value || 0;
+    // Calculate YTD change (you can enhance this with historical data later)
+    portfolioChange.value = 12.5; // Placeholder - implement actual calculation
+  } catch (error) {
+    console.error('Failed to fetch portfolio stats:', error);
+  }
+};
 
 const toggleProfileMenu = () => {
   showProfileMenu.value = !showProfileMenu.value;
@@ -158,10 +214,6 @@ const handleLogout = async () => {
   router.push('/login');
 };
 
-const showComingSoon = (featureName) => {
-  alert(`${featureName} feature is coming soon! This page will be available in a future update.`);
-};
-
 // Close dropdown when clicking outside
 const handleClickOutside = (event) => {
   const userMenu = event.target.closest('.user-menu');
@@ -173,6 +225,12 @@ const handleClickOutside = (event) => {
 
 onMounted(() => {
   document.addEventListener('click', handleClickOutside);
+  // Ensure user data is loaded
+  if (!authStore.user && authStore.isAuthenticated) {
+    authStore.fetchUserProfile();
+  }
+  // Fetch portfolio statistics
+  fetchPortfolioStats();
 });
 
 onUnmounted(() => {
@@ -222,6 +280,14 @@ onUnmounted(() => {
   opacity: 0.9;
 }
 
+.portfolio-change.positive {
+  color: #4ade80;
+}
+
+.portfolio-change.negative {
+  color: #f87171;
+}
+
 .nav-menu {
   display: flex;
   flex-direction: column;
@@ -240,11 +306,6 @@ onUnmounted(() => {
   font-weight: 500;
   transition: all 0.2s;
   opacity: 0.8;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  text-align: left;
-  width: 100%;
 }
 
 .nav-item:hover {
@@ -260,6 +321,12 @@ onUnmounted(() => {
 .nav-icon {
   width: 20px;
   height: 20px;
+}
+
+.nav-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 0.5rem 0;
 }
 
 /* Main Content Area */

@@ -9,7 +9,12 @@ from .views import (
     RoleListView,
     UpdateProfileView,
     NotificationPreferencesView,
-    ToggleMFAView
+    ToggleMFAView,
+    AdminUserListView,
+    AdminUserDetailView,
+    AdminCreateUserView,
+    AdminToggleSuperadminView,
+    AdminUserStatsView
 )
 
 app_name = 'users'
@@ -30,4 +35,11 @@ urlpatterns = [
     
     # Roles
     path('roles/', RoleListView.as_view(), name='roles'),
+    
+    # Admin - User Management
+    path('admin/users/', AdminUserListView.as_view(), name='admin_user_list'),
+    path('admin/users/create/', AdminCreateUserView.as_view(), name='admin_create_user'),
+    path('admin/users/stats/', AdminUserStatsView.as_view(), name='admin_user_stats'),
+    path('admin/users/<int:pk>/', AdminUserDetailView.as_view(), name='admin_user_detail'),
+    path('admin/users/<int:user_id>/toggle-superadmin/', AdminToggleSuperadminView.as_view(), name='admin_toggle_superadmin'),
 ]

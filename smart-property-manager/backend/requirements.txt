@@ -7,8 +7,13 @@ django-cors-headers==4.3.1
 psycopg2-binary==2.9.9
 django-contrib-postgres==0.0.1
 
-# PostGIS
-django-postgis==0.2.2
+# PostGIS (optional)
+# The `django-postgis` package is not available on some platforms (notably
+# default Windows pip installs). If you need PostGIS/GeoDjango features,
+# install the appropriate system libraries and use a compatible package on
+# your development platform (or run on WSL / a Linux container). This entry
+# was removed to allow pip to install on Windows. For Linux/devcontainers,
+# add an appropriate PostGIS-supporting package if required.
 
 # Authentication & Security
 djangorestframework-simplejwt==5.3.0
@@ -36,6 +41,7 @@ drf-yasg==1.21.7
 
 # Utilities
 python-decouple==3.8
+python-dotenv==1.0.0
 Pillow==10.1.0
 python-dateutil==2.8.2
 

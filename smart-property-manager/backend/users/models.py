@@ -54,6 +54,9 @@ class User(AbstractUser):
     date_of_birth = models.DateField(null=True, blank=True)
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
     
+    # Superadmin field (higher than regular admin)
+    is_superadmin = models.BooleanField(default=False, help_text='Designates that this user has all permissions including user management.')
+    
     # MFA fields
     mfa_enabled = models.BooleanField(default=False)
     mfa_secret = models.CharField(max_length=32, blank=True)
@@ -85,6 +88,9 @@ class User(AbstractUser):
     
     def has_permission(self, permission):
         """Check if user has specific permission based on role"""
+        # Superadmins have all permissions
+        if self.is_superadmin or self.is_superuser:
+            return True
         if not self.role:
             return False
         return getattr(self.role, permission, False)
